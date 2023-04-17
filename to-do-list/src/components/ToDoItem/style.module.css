@@ -1,0 +1,63 @@
+.todo-list-item-card {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-radius: 6px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 12px;
+}
+
+.priority {
+  font-weight: bold;
+  text-align: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+}
+
+.low {
+  background-color: #68b0ab;
+  color: #fff;
+}
+
+.medium {
+  background-color: #f9d56e;
+  color: #fff;
+}
+
+.high {
+  background-color: #f26b5e;
+  color: #fff;
+}
+
+.subject {
+  flex: 1;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.actions {
+  margin-left: 12px;
+}
+
+.editButton,
+.deleteButton {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  margin-left: 6px;
+  cursor: pointer;
+}
+
+.editButton {
+  background-color: #e2e2e2;
+}
+
+.deleteButton {
+  background-color: #f26b5e;
+  color: #fff;
+}
