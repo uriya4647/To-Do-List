@@ -5,7 +5,9 @@ form {
     padding: 10px;
     background-color: #f5f5f5;
     border-radius: 10px;
-    width: 400px; /* adjust the width as desired */
+
+    margin-left: 18%;
+    width: 60%;
   }
   
   label {

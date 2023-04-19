@@ -14,80 +14,103 @@ const createTodos = async (req, res) => {
     const createTodo = await controller.createTodo(todo);
     const newTodo = await controller.saveTodos(createTodo);
     console.log(`User created with id: ${newTodo.id}`);
-    res
-    .status(201)
-    .json({
-        newTodo,
-      });
+    res.status(201).json({
+      newTodo,
+    });
   } catch (error) {
     console.error("Error creating user:", error);
 
-    res.status(400)
-    .json({ error });
+    res.status(400).json({ error });
   }
 };
 
 const findAllTodos = async (req, res) => {
   try {
     const allTodos = await controller.findAll();
-
-    res
-    .status(200)
-      .json({
-        allTodos,
-      });
+    const orderIsDone = orderByIsDone(allTodos)
+    
+    res.status(200).json({
+      allTodos: orderIsDone
+    });
   } catch (error) {
     console.error("Error creating user:", error);
 
-    res.status(400)
-    .json({ error });
+    res.status(400).json({ error });
   }
 };
 
-const findTodoById = async ( req , res) =>{
-    const  id  = req.params.id
+const findTodoById = async (req, res) => {
+  const id = req.params.id;
 
+  try {
+    const foundTodo = await controller.findById(id);
+    if (!foundTodo) throw "the id not exsist";
 
-    try {
-        const foundTodo = await controller.findById(id);
-        if (!foundTodo) throw "the id not exsist"
-        
-        res
-        .status(200)
-          .json({
-            foundTodo,
-          });
-      } catch (error) {
-        console.error("Error creating user:", error);
-    
-        res.status(404)
-        .json({ error });
-      }
-} 
+    res.status(200).json({
+      foundTodo,
+    });
+  } catch (error) {
+    console.error("Error creating user:", error);
 
-const updateTodoById = async (req , res) =>{
+    res.status(404).json({ error });
+  }
+};
 
-    const  id  = req.params.id
-    const { description, priority, isdone } = req.body;
+const updateTodoById = async (req, res) => {
+  const id = req.params.id;
+  const { description, priority, isdone } = req.body;
 
-    try {
-        const foundTodo = await controller.findById(id);
-        if (!foundTodo) throw "the id not exsist"
-        
-        console.log("isdone" ,isdone );
+  try {
+    const foundTodo = await controller.findById(id);
+    if (!foundTodo) throw "the id not exsist";
 
-        updateTodo = await controller.updateTodos(id , description, priority, isdone );
-        res
-        .status(200)
-          .json({
-            updateTodo,
-          });
-      } catch (error) {
-        console.error("Error creating user:", error);
-    
-        res.status(404)
-        .json({ error });
-      }
-}
+    console.log("isdone", isdone);
 
-module.exports = { createTodos, findAllTodos ,findTodoById ,updateTodoById};
+    updateTodo = await controller.updateTodos(
+      id,
+      description,
+      priority,
+      isdone
+    );
+
+    res.status(200).json({
+      updateTodo,
+    });
+  } catch (error) {
+    console.error("Error creating user:", error);
+
+    res.status(404).json({ error });
+  }
+};
+
+const deleteTodoById = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const foundTodo = await controller.findById(id);
+    if (!foundTodo) throw "the id not exsist";
+
+    const deleteTodo = await controller.deleteTodos(id);
+    res.status(200).json({
+      deleteTodo,
+    });
+  } catch (error) {
+    console.error("Error creating user:", error);
+
+    res.status(404).json({ error });
+  }
+};
+
+function orderByIsDone (arr) {
+    return  arr.sort((a, b) => Number(a.isdone) - Number(b.isdone));
+   
+};
+
+module.exports = {
+  createTodos,
+  findAllTodos,
+  findTodoById,
+  updateTodoById,
+  deleteTodoById,
+
+};

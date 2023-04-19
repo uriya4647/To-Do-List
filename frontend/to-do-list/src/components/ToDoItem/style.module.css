@@ -2,11 +2,10 @@
   /* display: flex; */
   justify-content: center;
   align-items: center;
-  width: 400px;
+  width: 100%;
   margin-top: 15px;
-  
-  
 }
+
 .todo-list-item-card {
   display: flex;
   align-items: center;
@@ -14,7 +13,9 @@
   border-radius: 6px;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 12px;
-  flex-basis: calc(10% - 24px); 
+  margin-left: 24%;
+  flex-basis: calc(10% - 24px);
+  width: 48%;
 }
 
 .priority {
@@ -55,7 +56,9 @@
 }
 
 .editButton,
-.deleteButton {
+.deleteButton,
+.saveButton,
+.cancelButton {
   padding: 6px 12px;
   border-radius: 6px;
   font-size: 0.8rem;
@@ -72,6 +75,41 @@
   color: #fff;
 }
 
+.saveButton {
+  background-color: #68b0ab;
+  color: #fff;
+}
+
+.cancelButton {
+  background-color: #e2e2e2;
+}
+
 .doneCheckbox {
   margin-right: 6px;
+}
+
+.input-field {
+  width: 100%;
+  padding: 6px;
+  margin-bottom: 12px;
+  margin-left: 3px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1.2rem;
+}
+
+.select-field {
+  width: 100%;
+  padding: 6px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1.2rem;
+}
+
+.todo-form-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
 }

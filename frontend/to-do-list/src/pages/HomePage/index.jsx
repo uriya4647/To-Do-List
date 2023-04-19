@@ -1,15 +1,32 @@
-
-import ToDoList from "../../components/ToDoList"
-import AddTodo from "../../components/AddTodo.jsx"
-
+import { useState, useEffect } from "react";
+import ToDoList from "../../components/ToDoList";
+import { getAllTodos } from "../../utils/queris/queris";
+import AddOrEditTodo from "../../components/AddOrEditTodo";
+import AddTodo from '../../components/AddTodo';
 const HomePage = () => {
-return (
-<>
-<AddTodo />
- <ToDoList />
- </>
-)
+  const [todos, setTodos] = useState([]);
 
-}
+  useEffect(() => {
+     
+    getTodos();
+      
+  }, []);
 
-export default HomePage
+  const getTodos = () => {
+    getAllTodos()
+      .then((todo) => {
+        setTodos(todo.allTodos);
+      })
+      .catch((err) => alert("erorr"));
+  };
+
+
+  return (
+    <>
+      <AddTodo  getTodos = { getTodos }  />
+      <ToDoList todos={todos} getTodos = { getTodos } />
+    </>
+  );
+};
+
+export default HomePage;

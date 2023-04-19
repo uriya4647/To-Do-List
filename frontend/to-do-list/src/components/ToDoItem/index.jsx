@@ -1,5 +1,6 @@
-import { useState } from "react";
 import styles from "./style.module.css";
+import EditTodo from "../EditTodo";
+import { useState } from "react";
 
 const ToDoItem = ({
   id,
@@ -7,45 +8,53 @@ const ToDoItem = ({
   priority,
   isdone,
   onToggleChange,
-  onEdit,
   onDelete,
-  onAdd,
+  getTodos,
 }) => {
-  const [isChecked, setIsChecked] = useState(isdone ?? false);
+  const [openEditTodo, setOpenEditTodo] = useState(false);
 
   const handleChangeCheckBox = (isDone) => {
-    setIsChecked(isDone);
     onToggleChange(id, isDone);
   };
-console.log(isChecked);
+
   return (
-    <div className= {styles.container}>
-    <div
-      className={styles["todo-list-item-card"]}
-      onDoubleClick={() => {
-        console.log("SCDCDS");
-      }}
-    >
-      <div className={`${styles.priority} ${styles[priority]}`}>{priority}</div>
-      <div className={styles.description}>{isChecked ? <del>{description}</del> : description }</div>
-      <div className={styles.actions}>
-      <label>
-        <span>finish</span>
-        <input
-          type="checkbox"
-          checked={isChecked}
-          onChange={() => handleChangeCheckBox(!isChecked)}
-          className={styles.doneCheckbox}
-        />
-        </label>
-        {/* <button className={styles.editButton} onClick={onEdit}> */}
-        <button className={styles.editButton}>Edit</button>
-        <button className={styles.deleteButton}>
-          {/* <button className={styles.deleteButton} onClick={onDelete}> */}
-          Delete
-        </button>
+    <div className={styles.container}>
+      <div
+        className={styles["todo-list-item-card"]}
+        onDoubleClick={() => setOpenEditTodo(true)}
+      >
+        <div className={`${styles.priority} ${styles[priority]}`}>
+          {priority}
+        </div>
+        <div className={styles.description}>
+          {isdone ? <del>{description}</del> : description}
+        </div>
+        <div className={styles.actions}>
+          <label>
+            <span>finish</span>
+            <input
+              type="checkbox"
+              checked={isdone}
+              onChange={() => handleChangeCheckBox(!isdone)}
+              className={styles.doneCheckbox}
+            />
+          </label>
+
+          <button className={styles.deleteButton} onClick={() => onDelete(id)}>
+            Delete
+          </button>
+        </div>
       </div>
-    </div>
+      {openEditTodo && (
+        <EditTodo
+          id={id}
+          description={description}
+          priority={priority}
+          isdone={isdone}
+          setOpenEditTodo={setOpenEditTodo}
+          getTodos={getTodos}
+        />
+      )}
     </div>
   );
 };

@@ -13,13 +13,12 @@ const createTodo = async (todo) => {
 };
 
 const saveTodos = async (newTodo) => {
-    console.log("todo" , newTodo);
+  console.log("todo", newTodo);
   return await newTodo.save();
 };
 
 const updateTodos = async (id, description, priority, isdone) => {
-
-    return await Todos.update(
+  return await Todos.update(
     {
       description: description,
       priority: priority,
