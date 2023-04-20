@@ -1,9 +1,15 @@
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
 
-const sequelize = new Sequelize("todos", "postgres", "204647028", {
-  dialect: "postgres",
-});
+const sequelize = new Sequelize(
+  "todos",
+  "postgres",
+  process.env.POSTGRES_PASS,
+  {
+    dialect: "postgres",
+    logging: true,
+  }
+);
 
 (async () => {
   try {

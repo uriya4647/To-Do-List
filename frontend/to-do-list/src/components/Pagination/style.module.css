@@ -1,0 +1,31 @@
+.pagination {
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  background-color: aliceblue;
+  margin-left: 43%;
+  border-radius: 5px;
+}
+
+a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+a.active {
+  background-color: rgb(78, 78, 238);
+  background: #0052a5 0% 0% no-repeat padding-box;
+  color: white;
+  border-radius: 20%;
+
+}
+
+.none {
+  display: none;
+}
+
+.noAction {
+  pointer-events: none;
+}

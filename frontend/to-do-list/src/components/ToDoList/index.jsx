@@ -1,30 +1,25 @@
-import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import ToDoItem from "../ToDoItem";
-import styles from "./style.module.css";
-import mainRequest from "../../utils/serverRequest/mainRequest";
 
-const ToDoList = () => {
-  const [todos, setTodos] = useState([]);
-  useEffect(() => {
-    //whatt to do whit erorr
-    mainRequest("todos", "GET")
-      .then((todo) => {
-        setTodos(todo.allTodos);
-        // setTaskDone(todo.allTodos.isdone)
-      })
-      .catch((err) => console.log(err));
-  }, []);
+import { updateTodos, deleteTodos } from "../../utils/queris/queris";
 
+const ToDoList = ({ todos, getTodos }) => {
   const onToggleChange = (id, isDone) => {
-    console.log("isDone", isDone);
-    mainRequest(`todos/${id}`, "PUT", { isdone: isDone })
+    updateTodos({ isdone: isDone }, id)
       .then((todoUpdate) => {
-        console.log("sucsess: ", todoUpdate);
+        getTodos();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => alert("erorr"));
   };
 
-  console.log(todos);
+  const onDelete = (id) => {
+    deleteTodos(id)
+      .then((todoUpdate) => {
+      
+        getTodos();
+      })
+      .catch((err) => alert("erorr"));
+  };
 
   return (
     <>
@@ -38,14 +33,18 @@ const ToDoList = () => {
               priority={todo.priority}
               isdone={todo.isdone}
               onToggleChange={onToggleChange}
+              onDelete={onDelete}
+              getTodos={getTodos}
             />
           );
         })}
-      {/* <button className={styles.addButton} onClick={onAdd}> */}
-     
-      <button className={styles.addButton}>+</button>
     </>
   );
 };
 
 export default ToDoList;
+
+ToDoItem.prototype = {
+  todos: PropTypes.array,
+  getTodos: PropTypes.func,
+};

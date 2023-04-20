@@ -1,20 +1,15 @@
+import { BrowserRouter } from "react-router-dom";
+import Layout from "./layout/Layout/index.jsx";
+import backgrounds from "../src/images/preview.jpg";
 
-import HomePage from './pages/HomePage';
 function App() {
-
   return (
-  <>
-
-  <HomePage /> 
- 
-    </>
-
-
-
-);
-    
-  
-  
+    <div style={{ marginTop: "0%", backgroundImage: `url(${backgrounds})` }}>
+      <BrowserRouter>
+        <Layout />
+      </BrowserRouter>
+    </div>
+  );
 }
 
 export default App;

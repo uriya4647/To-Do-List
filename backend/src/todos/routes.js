@@ -1,12 +1,16 @@
 const {Router} = require("express");
 const router = Router();
-const controller = require("./controller");
-const sevice = require('./servise');
+const service = require('./servise');
 
-router.get("/" , sevice.findAllTodos);
-router.get("/:id" , sevice.findTodoById);
-router.post("/" ,sevice.createTodos);
-router.put("/:id" ,sevice.updateTodoById);
+router.get("/" , service.findAllTodos);
+router.get("/:id" , service.findTodoById);
+router.get("/sort/priorty/:currentPage/:limit" , service.findAllTodosByPriorty);
+router.get("/sort/done/:currentPage/:limit" , service.findAllTodosByDone);
+router.post("/get-page-count" , service.getNumOfPage);
+router.post("/get-by-pagintion/:currentPage/:limit" , service.getByPagintion);
+router.post("/" ,service.createTodos);
+router.put("/:id" ,service.updateTodoById);
+router.delete("/:id" ,service.deleteTodoById);
 
 
 
