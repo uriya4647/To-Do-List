@@ -1,4 +1,5 @@
 import styles from "./style.module.css";
+import PropTypes from "prop-types";
 import EditTodo from "../EditTodo";
 import { useState } from "react";
 
@@ -60,3 +61,13 @@ const ToDoItem = ({
 };
 
 export default ToDoItem;
+
+ToDoItem.prototype = {
+  id: PropTypes.string,
+  description: PropTypes.string,
+  priority: PropTypes.string,
+  isdone: PropTypes.bool,
+  getTodos: PropTypes.func,
+  onToggleChange: PropTypes.func,
+  onDelete: PropTypes.func,
+};

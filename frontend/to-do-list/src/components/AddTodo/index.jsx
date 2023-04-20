@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import "./style.module.css";
-import {validtionTodos} from '../../utils/functions/validtionsTodo';
-import {setNewTodos} from '../../utils/queris/queris';
+import { validtionTodos } from "../../utils/functions/validtionsTodo";
+import { setNewTodos } from "../../utils/queris/queris";
 
 function AddTodo({ getTodos }) {
   const [newTodo, setNewTodo] = useState({
@@ -14,15 +15,12 @@ function AddTodo({ getTodos }) {
     setNewTodo({ ...newTodo, [prop]: event.target.value });
   };
 
-
   const handleSubmit = (event) => {
     event.preventDefault();
-   
-    if (validtionTodos(newTodo)) {
-      setNewTodos( newTodo)
-      .then((post) => {
-     getTodos();   
 
+    if (validtionTodos(newTodo)) {
+      setNewTodos(newTodo).then((post) => {
+        getTodos();
       });
       setNewTodo({
         description: "",
@@ -68,3 +66,7 @@ function AddTodo({ getTodos }) {
 }
 
 export default AddTodo;
+
+AddTodo.prototype = {
+  getTodos: PropTypes.func,
+};

@@ -1,29 +1,25 @@
-
+import PropTypes from "prop-types";
 import ToDoItem from "../ToDoItem";
-import styles from "./style.module.css";
-import {updateTodos ,deleteTodos} from "../../utils/queris/queris";
 
-const ToDoList = ({ todos , getTodos}) => {
-  
+import { updateTodos, deleteTodos } from "../../utils/queris/queris";
+
+const ToDoList = ({ todos, getTodos }) => {
   const onToggleChange = (id, isDone) => {
-    updateTodos( { isdone: isDone } , id)
+    updateTodos({ isdone: isDone }, id)
       .then((todoUpdate) => {
-        console.log("sucsess: ", todoUpdate);
         getTodos();
       })
       .catch((err) => alert("erorr"));
   };
 
-  const onDelete = (id) =>{
-
+  const onDelete = (id) => {
     deleteTodos(id)
-    .then((todoUpdate) => {
-      console.log("sucsess: ", todoUpdate);
-      getTodos();
-    })
-    .catch((err) => alert("erorr"));
-
-  }
+      .then((todoUpdate) => {
+      
+        getTodos();
+      })
+      .catch((err) => alert("erorr"));
+  };
 
   return (
     <>
@@ -37,16 +33,18 @@ const ToDoList = ({ todos , getTodos}) => {
               priority={todo.priority}
               isdone={todo.isdone}
               onToggleChange={onToggleChange}
-              onDelete ={onDelete}
+              onDelete={onDelete}
               getTodos={getTodos}
             />
           );
         })}
-
-
-      
     </>
   );
 };
 
 export default ToDoList;
+
+ToDoItem.prototype = {
+  todos: PropTypes.array,
+  getTodos: PropTypes.func,
+};

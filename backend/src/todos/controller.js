@@ -4,6 +4,14 @@ const findAll = async () => {
   return await Todos.findAll();
 };
 
+const findByPagntion = async (offset, limit) => {
+  return await Todos.findAll({ offset: offset, limit: limit });
+};
+
+const findCountRowOfTable = async () => {
+  return await Todos.count();
+};
+
 const findById = async (id) => {
   return await Todos.findByPk(id);
 };
@@ -48,4 +56,6 @@ module.exports = {
   saveTodos,
   deleteTodos,
   updateTodos,
+  findByPagntion,
+  findCountRowOfTable,
 };

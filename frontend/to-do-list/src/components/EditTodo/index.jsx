@@ -1,5 +1,6 @@
 import styles from "./style.module.css";
 import { useState } from "react";
+import PropTypes from "prop-types";
 import { validtionTodos } from "../../utils/functions/validtionsTodo";
 import { updateTodos } from "../../utils/queris/queris";
 
@@ -16,7 +17,7 @@ const EditTodo = ({
     priority: priority ?? "low",
     isdone: isdone ?? false,
   });
-  console.log(priority);
+  
   const handleChange = (prop) => (event) => {
     setTodo({ ...todo, [prop]: event.target.value });
   };
@@ -91,3 +92,12 @@ const EditTodo = ({
 };
 
 export default EditTodo;
+
+EditTodo.prototype = {
+  id: PropTypes.string,
+  description: PropTypes.string,
+  priority: PropTypes.string,
+  isdone: PropTypes.bool,
+  getTodos: PropTypes.func,
+  setOpenEditTodo: PropTypes.func,
+};

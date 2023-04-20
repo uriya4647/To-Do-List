@@ -1,15 +1,9 @@
-/* .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin-top: 15px;
-  } */
+
   
   .todo-list-item-card {
     width: 48%;
     margin-left: 24%;
-    
+    background-color: #fff;
     display: flex;
     align-items: center;
     padding: 12px;
