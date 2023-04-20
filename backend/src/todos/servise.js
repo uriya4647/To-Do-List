@@ -1,9 +1,8 @@
 const controller = require("./controller");
 
 const createTodos = async (req, res) => {
-  console.log("req.body", req.body);
   const { description, priority, isdone } = req.body;
-  console.log("req", { description, priority, isdone });
+
   const todo = {
     description,
     priority,
@@ -107,7 +106,7 @@ const findAllTodosByPriorty = async (req, res) => {
 
   try {
     const todosByPagnation = await getPagintion(currentPage, limit);
-    console.log("todosByPagnation", todosByPagnation);
+
     const orderByPriorty = orderByPriority(todosByPagnation.current);
 
     res.status(200).json({
@@ -186,7 +185,7 @@ function orderByPriority(arr) {
 
 async function getPagintion(currentPage, limit) {
   const countObjects = await getCountOfObjects();
-  console.log(countObjects);
+
   const countPage = Math.ceil(countObjects / limit); // 7 / 5
 
   if (currentPage > countPage)
