@@ -2,8 +2,8 @@ const { Sequelize } = require("sequelize");
 require("dotenv").config();
 
 const sequelize = new Sequelize(
-  "todos",
-  "postgres",
+  process.env.DB_NAME,
+  process.env.DB_USER,
   process.env.POSTGRES_PASS,
   {
     dialect: "postgres",

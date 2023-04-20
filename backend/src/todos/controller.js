@@ -21,7 +21,6 @@ const createTodo = async (todo) => {
 };
 
 const saveTodos = async (newTodo) => {
-  console.log("todo", newTodo);
   return await newTodo.save();
 };
 
